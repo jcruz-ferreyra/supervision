@@ -1,5 +1,5 @@
 import math
-from typing import Dict, Optional
+from typing import Dict, List, Optional
 
 import cv2
 import numpy as np
@@ -14,7 +14,7 @@ class LineZone:
     Count the number of objects that cross a line.
     """
 
-    def __init__(self, start: Point, end: Point, direction="both"):
+    def __init__(self, start: Point, end: Point, name: str = None, direction="both", center=False):
         """
         Initialize a LineCounter object.
 
@@ -25,12 +25,16 @@ class LineZone:
                 "in": Start point to the left, elements crossing up the line.
                 "out": Start point to the left, elements crossing down the line.
                 "both": Start point to the left, both "in" and "out" elements.
+        
         """
+        self.name = name
         self.vector = Vector(start=start, end=end)
         self.tracker_state: Dict[str, bool] = {}
-        self.in_count: int = 0
-        self.out_count: int = 0
+        self.in_count: Dict[str, int] = {}
+        self.out_count: Dict[str, int] = {}
+        self.counted_trackers: List[int] = []
         self.direction: str = direction
+        self.center: bool = center
 
     def trigger(self, detections: Detections):
         """
@@ -44,22 +48,35 @@ class LineZone:
             # handle detections with no tracker_id
             if tracker_id is None:
                 continue
-
-            # we check if all four anchors of bbox are on the same side of vector
-            x1, y1, x2, y2 = xyxy
-            anchors = [
-                Point(x=x1, y=y1),
-                Point(x=x1, y=y2),
-                Point(x=x2, y=y1),
-                Point(x=x2, y=y2),
-            ]
-            triggers = [self.vector.is_in(point=anchor) for anchor in anchors]
-
-            # detection is partially in and partially out
-            if len(set(triggers)) == 2:
+            elif tracker_id in self.counted_trackers:
                 continue
 
-            tracker_state = triggers[0]
+            x1, y1, x2, y2 = xyxy
+
+            if self.center:
+                x = (x1 + x2) // 2
+                y = (y1 + y2) // 2
+
+                # we get if center of bbox is in or out with respect to the line counter
+                anchor = Point(x=x, y=y)
+                tracker_state = self.vector.is_in(point=anchor)
+            else:
+                # we check if all four anchors of bbox are on the same side of vector
+                anchors = [
+                    Point(x=x1, y=y1),
+                    Point(x=x1, y=y2),
+                    Point(x=x2, y=y1),
+                    Point(x=x2, y=y2),
+                ]
+                triggers = [self.vector.is_in(point=anchor) for anchor in anchors]
+
+                # detection is partially in and partially out
+                if len(set(triggers)) == 2:
+                    continue
+
+                # we get if the whole bbox is in or out with respect to the line counter
+                tracker_state = triggers[0]
+
             # handle new detection
             if tracker_id not in self.tracker_state:
                 self.tracker_state[tracker_id] = tracker_state
@@ -69,11 +86,20 @@ class LineZone:
             if self.tracker_state.get(tracker_id) == tracker_state:
                 continue
 
+            # handle detection that crossed the line
             self.tracker_state[tracker_id] = tracker_state
             if tracker_state:
-                self.in_count += 1
+                if class_id in self.in_count:
+                    self.in_count[class_id] += 1
+                else:
+                    self.in_count[class_id] = 1
+                self.counted_trackers.append(tracker_id)
             else:
-                self.out_count += 1
+                if class_id in self.out_count:
+                    self.out_count[class_id] += 1
+                else:
+                    self.out_count[class_id] = 1
+                self.counted_trackers.append(tracker_id)
 
 
 class LineZoneAnnotator:
