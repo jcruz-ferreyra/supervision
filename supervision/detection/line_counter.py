@@ -392,14 +392,14 @@ class LineZoneAnnotator:
 
         # Create in/out text.
         in_text = (
-            f"{self.custom_in_text}: {line_counter.in_count}"
+            f"{self.custom_in_text}: {sum(line_counter.in_count.values())}"
             if self.custom_in_text is not None
-            else f"in: {line_counter.in_count}"
+            else f"in: {sum(line_counter.in_count.values())}"
         )
         out_text = (
-            f"{self.custom_out_text}: {line_counter.out_count}"
+            f"{self.custom_out_text}: {sum(line_counter.out_count.values())}"
             if self.custom_out_text is not None
-            else f"out: {line_counter.out_count}"
+            else f"out: {sum(line_counter.out_count.values())}"
         )
 
         if line_counter.direction == "both":
