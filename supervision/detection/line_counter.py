@@ -59,8 +59,8 @@ class LineZone:
         self.direction: str = direction
         self.reference: bool = reference
 
-        _validate_direction(mask=self.direction)
-        _validate_reference(mask=self.reference)
+        _validate_direction(direction=self.direction)
+        _validate_reference(reference=self.reference)
 
     def trigger(self, detections: Detections):
         """
