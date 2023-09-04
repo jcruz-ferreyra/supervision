@@ -1,4 +1,5 @@
 import math
+import sys
 from typing import Dict, List, Optional
 
 import cv2
@@ -8,23 +9,45 @@ from supervision.detection.core import Detections
 from supervision.draw.color import Color
 from supervision.geometry.core import Point, Rect, Vector
 
+def _validate_direction(direction: str) -> None:
+    is_valid = direction in ["in", "out", "both"]
+    if not is_valid:
+        raise ValueError("direction must be one of the following values: \"in\", \"out\", \"both\"")
+    
+def _validate_reference(reference: str) -> None:
+    is_valid = reference in ["center", "top", "bottom", "full"]
+    if not is_valid:
+        raise ValueError("direction must be one of the following values: \"center\", \"top\", \"bottom\", \"full\"")
 
 class LineZone:
     """
     Count the number of objects that cross a line.
     """
 
-    def __init__(self, start: Point, end: Point, name: str = None, direction="both", center=False):
+    def __init__(
+            self,
+            start: Point,
+            end: Point,
+            name: str = None,
+            direction: str = "both",
+            reference: str = "center"
+            ):
         """
         Initialize a LineCounter object.
 
         Attributes:
             start (Point): The starting point of the line.
             end (Point): The ending point of the line.
+            name (str): Name of the line_counter.
             direction (str): What count of items crossing the line is displayed.
                 "in": Start point to the left, elements crossing up the line.
                 "out": Start point to the left, elements crossing down the line.
                 "both": Start point to the left, both "in" and "out" elements.
+            reference (str): What part of the bbox is considered for crossing objects.
+                "center": Center point of bbox.
+                "top": Center point of bbox's top.
+                "bottom": Center point of bbox's bottom.
+                "full": Four bbox's anchors.
         
         """
         self.name = name
@@ -34,7 +57,10 @@ class LineZone:
         self.out_count: Dict[str, int] = {}
         self.counted_trackers: List[int] = []
         self.direction: str = direction
-        self.center: bool = center
+        self.reference: bool = reference
+
+        _validate_direction(mask=self.direction)
+        _validate_reference(mask=self.reference)
 
     def trigger(self, detections: Detections):
         """
@@ -53,14 +79,22 @@ class LineZone:
 
             x1, y1, x2, y2 = xyxy
 
-            if self.center:
+            if self.reference == "center":
                 x = (x1 + x2) // 2
                 y = (y1 + y2) // 2
-
-                # we get if center of bbox is in or out with respect to the line counter
                 anchor = Point(x=x, y=y)
                 tracker_state = self.vector.is_in(point=anchor)
-            else:
+            elif self.reference == "top":
+                x = (x1 + x2) // 2
+                y = y2
+                anchor = Point(x=x, y=y)
+                tracker_state = self.vector.is_in(point=anchor)
+            elif self.reference == "bottom":
+                x = (x1 + x2) // 2
+                y = y1
+                anchor = Point(x=x, y=y)
+                tracker_state = self.vector.is_in(point=anchor)
+            elif self.reference == "full":
                 # we check if all four anchors of bbox are on the same side of vector
                 anchors = [
                     Point(x=x1, y=y1),
