@@ -86,12 +86,12 @@ class LineZone:
                 tracker_state = self.vector.is_in(point=anchor)
             elif self.reference == "top":
                 x = (x1 + x2) // 2
-                y = y2
+                y = y1
                 anchor = Point(x=x, y=y)
                 tracker_state = self.vector.is_in(point=anchor)
             elif self.reference == "bottom":
                 x = (x1 + x2) // 2
-                y = y1
+                y = y2
                 anchor = Point(x=x, y=y)
                 tracker_state = self.vector.is_in(point=anchor)
             elif self.reference == "full":
