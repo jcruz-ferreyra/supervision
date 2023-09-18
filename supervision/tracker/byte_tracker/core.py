@@ -263,7 +263,7 @@ class ByteTrack:
             List[STrack]: Updated tracks.
         """
         self.frame_id += 1
-        activated_starcks = []
+        activated_stracks = []
         refind_stracks = []
         lost_stracks = []
         removed_stracks = []
@@ -272,24 +272,24 @@ class ByteTrack:
         scores = tensors[:, 4]
         bboxes = tensors[:, :4]
 
-        remain_inds = scores > self.track_thresh
+        inds_keep = scores > self.track_thresh
         inds_low = scores > 0.1
         inds_high = scores < self.track_thresh
 
         inds_second = np.logical_and(inds_low, inds_high)
+        dets_keep = bboxes[inds_keep]
         dets_second = bboxes[inds_second]
-        dets = bboxes[remain_inds]
-        scores_keep = scores[remain_inds]
+        scores_keep = scores[inds_keep]
         scores_second = scores[inds_second]
 
-        class_ids_keep = class_ids[remain_inds]
+        class_ids_keep = class_ids[inds_keep]
         class_ids_second = class_ids[inds_second]
 
-        if len(dets) > 0:
+        if len(dets_keep) > 0:
             """Detections"""
             detections = [
                 STrack(STrack.tlbr_to_tlwh(tlbr), s, c)
-                for (tlbr, s, c) in zip(dets, scores_keep, class_ids_keep)
+                for (tlbr, s, c) in zip(dets_keep, scores_keep, class_ids_keep)
             ]
         else:
             detections = []
@@ -319,7 +319,7 @@ class ByteTrack:
             det = detections[idet]
             if track.state == TrackState.Tracked:
                 track.update(detections[idet], self.frame_id)
-                activated_starcks.append(track)
+                activated_stracks.append(track)
             else:
                 track.re_activate(det, self.frame_id, new_id=False)
                 refind_stracks.append(track)
@@ -348,7 +348,7 @@ class ByteTrack:
             det = detections_second[idet]
             if track.state == TrackState.Tracked:
                 track.update(det, self.frame_id)
-                activated_starcks.append(track)
+                activated_stracks.append(track)
             else:
                 track.re_activate(det, self.frame_id, new_id=False)
                 refind_stracks.append(track)
@@ -369,7 +369,7 @@ class ByteTrack:
         )
         for itracked, idet in matches:
             unconfirmed[itracked].update(detections[idet], self.frame_id)
-            activated_starcks.append(unconfirmed[itracked])
+            activated_stracks.append(unconfirmed[itracked])
         for it in u_unconfirmed:
             track = unconfirmed[it]
             track.mark_removed()
@@ -381,7 +381,7 @@ class ByteTrack:
             if track.score < self.det_thresh:
                 continue
             track.activate(self.kalman_filter, self.frame_id)
-            activated_starcks.append(track)
+            activated_stracks.append(track)
         """ Step 5: Update state"""
         for track in self.lost_tracks:
             if self.frame_id - track.end_frame > self.max_time_lost:
@@ -391,7 +391,7 @@ class ByteTrack:
         self.tracked_tracks = [
             t for t in self.tracked_tracks if t.state == TrackState.Tracked
         ]
-        self.tracked_tracks = joint_tracks(self.tracked_tracks, activated_starcks)
+        self.tracked_tracks = joint_tracks(self.tracked_tracks, activated_stracks)
         self.tracked_tracks = joint_tracks(self.tracked_tracks, refind_stracks)
         self.lost_tracks = sub_tracks(self.lost_tracks, self.tracked_tracks)
         self.lost_tracks.extend(lost_stracks)
