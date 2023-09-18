@@ -17,7 +17,7 @@ def _validate_direction(direction: str) -> None:
 def _validate_reference(reference: str) -> None:
     is_valid = reference in ["center", "top", "bottom", "full"]
     if not is_valid:
-        raise ValueError("direction must be one of the following values: \"center\", \"top\", \"bottom\", \"full\"")
+        raise ValueError("reference must be one of the following values: \"center\", \"top\", \"bottom\", \"full\"")
 
 class LineZone:
     """
