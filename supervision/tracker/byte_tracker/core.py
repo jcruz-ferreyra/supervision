@@ -1,3 +1,4 @@
+from collections import Counter
 from typing import List, Tuple
 
 import numpy as np
@@ -20,6 +21,7 @@ class STrack(BaseTrack):
 
         self.score = score
         self.class_ids = class_ids
+        self.previous_class_ids = [self.class_ids]
         self.tracklet_len = 0
 
     def predict(self):
@@ -73,6 +75,24 @@ class STrack(BaseTrack):
         self.frame_id = frame_id
         if new_id:
             self.track_id = self.next_id()
+
+        # set as class id the most repeated class id in previous 30 frames
+        self.previous_class_ids.append(new_track.class_id)
+        last_30 = (
+            self.previous_class_ids[-30:]
+            if len(self.previous_class_ids) >= 30
+            else self.previous_class_ids
+        )
+        counts = Counter(last_30)
+
+        def custom_key(item):
+            count_keys = list(counts.keys())
+            count_keys.reverse()
+            return counts[item], count_keys.index(item)
+        
+        new_class_id = max(set(last_30), key=custom_key)
+        self.class_ids = new_class_id
+
         self.score = new_track.score
 
     def update(self, new_track, frame_id):
@@ -93,6 +113,23 @@ class STrack(BaseTrack):
         self.state = TrackState.Tracked
         self.is_activated = True
 
+        # set as class id the most repeated class id in previous 30 frames
+        self.previous_class_ids.append(new_track.class_id)
+        last_30 = (
+            self.previous_class_ids[-30:]
+            if len(self.previous_class_ids) >= 30
+            else self.previous_class_ids
+        )
+        counts = Counter(last_30)
+
+        def custom_key(item):
+            count_keys = list(counts.keys())
+            count_keys.reverse()
+            return counts[item], count_keys.index(item)
+        
+        new_class_id = max(set(last_30), key=custom_key)
+        self.class_ids = new_class_id
+        
         self.score = new_track.score
 
     @property
