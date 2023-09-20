@@ -77,7 +77,7 @@ class STrack(BaseTrack):
             self.track_id = self.next_id()
 
         # set as class id the most repeated class id in previous 30 frames
-        self.previous_class_ids.append(new_track.class_id)
+        self.previous_class_ids.append(new_track.class_ids)
         last_30 = (
             self.previous_class_ids[-30:]
             if len(self.previous_class_ids) >= 30
@@ -114,7 +114,7 @@ class STrack(BaseTrack):
         self.is_activated = True
 
         # set as class id the most repeated class id in previous 30 frames
-        self.previous_class_ids.append(new_track.class_id)
+        self.previous_class_ids.append(new_track.class_ids)
         last_30 = (
             self.previous_class_ids[-30:]
             if len(self.previous_class_ids) >= 30
