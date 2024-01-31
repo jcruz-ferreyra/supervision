@@ -31,42 +31,38 @@ class LineZone:
     """
 
     def __init__(
-        
         self,
-       
         start: Point,
-       
         end: Point,
         trigger_in: bool = True,
         trigger_out: bool = True,
-    ,
         triggering_anchors: Iterable[Position] = (
             Position.TOP_LEFT,
             Position.TOP_RIGHT,
             Position.BOTTOM_LEFT,
             Position.BOTTOM_RIGHT,
-        ),
+        )
     ):
         """
         Args:
             start (Point): The starting point of the line.
             end (Point): The ending point of the line.
+            trigger_in (bool): Count object crossing in the line.
+            trigger_out (bool): Count object crossing out the line.
             triggering_anchors (List[sv.Position]): A list of positions
                 specifying which anchors of the detections bounding box
                 to consider when deciding on whether the detection
                 has passed the line counter or not. By default, this
                 contains the four corners of the detection's bounding box
-            trigger_in (bool): Count object crossing in the line.
-            trigger_out (bool): Count object crossing out the line.
         """
         self.vector = Vector(start=start, end=end)
         self.limits = self.calculate_region_of_interest_limits(vector=self.vector)
         self.tracker_state: Dict[str, bool] = {}
         self.in_count: int = 0
         self.out_count: int = 0
-        self.triggering_anchors = triggering_anchors
         self.trigger_in = trigger_in
         self.trigger_out = trigger_out
+        self.triggering_anchors = triggering_anchors
 
     @staticmethod
     def calculate_region_of_interest_limits(vector: Vector) -> Tuple[Vector, Vector]:
