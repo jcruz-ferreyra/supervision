@@ -34,14 +34,12 @@ class LineZone:
         self,
         start: Point,
         end: Point,
-        trigger_in: bool = True,
-        trigger_out: bool = True,
         triggering_anchors: Iterable[Position] = (
             Position.TOP_LEFT,
             Position.TOP_RIGHT,
             Position.BOTTOM_LEFT,
             Position.BOTTOM_RIGHT,
-        )
+        ),
     ):
         """
         Args:
@@ -99,7 +97,6 @@ class LineZone:
         cross_product_1 = limits[0].cross_product(point)
         cross_product_2 = limits[1].cross_product(point)
         return (cross_product_1 > 0) == (cross_product_2 > 0)
-
 
     def trigger(self, detections: Detections) -> Tuple[np.ndarray, np.ndarray]:
         """
@@ -213,41 +210,6 @@ class LineZoneAnnotator:
         self.display_in_count: bool = display_in_count
         self.display_out_count: bool = display_out_count
 
-    # def _annotate_count(
-    #     self,
-    #     frame: np.ndarray,
-    #     center_text_anchor: Point,
-    #     text: str,
-    #     is_in_count: bool,
-    # ) -> None:
-    #     """This method is drawing the text on the frame.
-
-    #     Args:
-    #         frame (np.ndarray): The image on which the text will be drawn.
-    #         center_text_anchor: The center point that the text will be drawn.
-    #         text (str): The text that will be drawn.
-    #         is_in_count (bool): Whether to display the in count or out count.
-    #     """
-    #     _, text_height = cv2.getTextSize(
-    #         text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
-    #     )[0]
-
-    #     if is_in_count:
-    #         center_text_anchor.y -= int(self.text_offset * text_height)
-    #     else:
-    #         center_text_anchor.y += int(self.text_offset * text_height)
-
-    #     draw_text(
-    #         scene=frame,
-    #         text=text,
-    #         text_anchor=center_text_anchor,
-    #         text_color=self.text_color,
-    #         text_scale=self.text_scale,
-    #         text_thickness=self.text_thickness,
-    #         text_padding=self.text_padding,
-    #         background_color=self.color,
-    #     )
-
     def annotate(self, frame: np.ndarray, line_counter: LineZone) -> np.ndarray:
         """
         Draws the line on the frame using the line_counter provided.
@@ -286,10 +248,8 @@ class LineZoneAnnotator:
                 else f"in: {line_counter.in_count}"
             )
             frame = self._annotate_count(
-                frame=frame,
-                line_counter=line_counter,
-                text=in_text,
-                is_in_count=True)
+                frame=frame, line_counter=line_counter, text=in_text, is_in_count=True
+            )
 
         if self.display_out_count:
             out_text = (
@@ -298,10 +258,8 @@ class LineZoneAnnotator:
                 else f"out: {line_counter.out_count}"
             )
             frame = self._annotate_count(
-                frame=frame,
-                line_counter=line_counter,
-                text=out_text,
-                is_in_count=False)
+                frame=frame, line_counter=line_counter, text=out_text, is_in_count=False
+            )
 
         return frame
 
@@ -322,131 +280,37 @@ class LineZoneAnnotator:
             text (str): The text that will be drawn.
             is_in_count (bool): Whether to display the in count or out count.
         """
-        
-        (text_width, text_height), _ = cv2.getTextSize(
+        text_width, text_height = cv2.getTextSize(
             text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
-        )
-        background_dim = max(text_width, text_height) + 30
+        )[0]
 
-        text_background_img = self._create_background_img(background_dim)
+        text_background_img = np.zeros((frame.shape[0], frame.shape[1]), dtype=np.uint8)
         box_background_img = text_background_img.copy()
 
-        text_position = self._get_text_position(background_dim, text_width, text_height)
+        text_anchor = self._get_text_anchor(
+            line_counter=line_counter,
+            text_width=text_width,
+            text_height=text_height,
+            is_in_count=is_in_count,
+            centered=False,
+        )
 
+        text_img = self._draw_text(text_background_img, text, text_anchor)
         box_img = self._draw_box(
-            box_background_img, text_width, text_height, text_position
-        )
-        text_img = self._draw_text(text_background_img, text, text_position)
-
-        box_img_rotated = self._rotate_img(box_img, line_counter)
-        text_img_rotated = self._rotate_img(text_img, line_counter)
-
-        img_position = self._get_img_position(
-            line_counter, text_width, text_height, is_in_count
+            box_background_img, text_width, text_height, text_anchor
         )
 
-        img_bbox = self._get_img_bbox(box_img_rotated, frame, img_position)
-
-        box_img_rotated = self._trim_img(box_img_rotated, frame, img_bbox)
-        text_img_rotated = self._trim_img(text_img_rotated, frame, img_bbox)
-
-        frame = self._annotate_box(frame, box_img_rotated, img_bbox)
-        frame = self._annotate_text(frame, text_img_rotated, img_bbox)
-
-
-    def _create_background_img(self, background_dim: int):
-        """
-        Create squared background image to place text or text-box.
-
-        Attributes:
-            background_dim (int): Dimension of the squared background image.
-
-        Returns:
-            np.ndarray: Squared array representing an empty background image.
-        """
-        return np.zeros((background_dim, background_dim), dtype=np.uint8)
-
-    def _get_text_position(self, background_dim: int, text_width: int, text_height: int):
-        """
-        Get insertion point to center text in background image.
-
-        Attributes:
-            background_dim (int): Dimension of the squared background image.
-            text_width (int): Text width.
-            text_height (int): Text height.
-
-        Returns:
-            (int, int): xy point to center text insertion.
-        """
-        text_position = (
-            (background_dim // 2) - (text_width // 2),
-            (background_dim // 2) + (text_height // 2),
+        text_img_rotated = self._rotate_img(
+            text_img, line_counter, rotation_center=text_anchor
+        )
+        box_img_rotated = self._rotate_img(
+            box_img, line_counter, rotation_center=text_anchor
         )
 
-        return text_position
-
-    def _draw_box(
-        self,
-        box_background_img: np.ndarray,
-        text_width: int,
-        text_height: int,
-        text_position: tuple,
-    ):
-        """
-        Draw text-box centered in the background image.
-
-        Attributes:
-            box_background_img (np.ndarray): Empty background image.
-            text_width (int): Text width.
-            text_height (int): Text height.
-            text_position (int, int): xy point to center text insertion.
-
-        Returns:
-            np.ndarray: Background image with text-box drawed in it.
-        """
-        box = Rect(
-            x=text_position[0],
-            y=text_position[1] - text_height,
-            width=text_width,
-            height=text_height,
-        ).pad(padding=self.text_padding)
-
-        cv2.rectangle(
-            box_background_img,
-            box.top_left.as_xy_int_tuple(),
-            box.bottom_right.as_xy_int_tuple(),
-            (255, 255, 255),
-            -1,
-        )
-
-        return box_background_img
-
-    def _draw_text(
-        self, text_background_img: np.ndarray, text: str, text_position: tuple
-    ):
-        """
-        Draw text-box centered in the background image.
-
-        Attributes:
-            text_background_img (np.ndarray): Empty background image.
-            text (str): Text to draw in the background image.
-            text_position (int, int): xy insertion point to center text in background.
-
-        Returns:
-            np.ndarray: Background image with text drawed in it.
-        """
-        cv2.putText(
-            text_background_img,
-            text,
-            text_position,
-            cv2.FONT_HERSHEY_SIMPLEX,
-            self.text_scale,
-            (255, 255, 255),
-            self.text_thickness,
-            cv2.LINE_AA,
-        )
-
-        return text_background_img
+        frame = self._annotate_text(frame, text_img_rotated)
+        frame = self._annotate_box(frame, box_img_rotated)
+        
+        return frame
 
     def _get_line_angle(self, line_counter: LineZone):
         """
@@ -477,35 +341,13 @@ class LineZoneAnnotator:
 
         return line_angle
 
-    def _rotate_img(self, img: np.ndarray, line_counter: LineZone):
-        """
-        Rotate img using line counter angle.
-
-        Attributes:
-            img (np.ndarray): Original image to rotate.
-            line_counter (LineZone): The line counter object used to annotate.
-
-        Returns:
-            np.ndarray: Image with the same shape as input but with rotated content.
-        """
-        img_dim = img.shape[0]
-
-        line_angle = self._get_line_angle(line_counter)
-
-        rotation_center = ((img_dim // 2), (img_dim // 2))
-        rotation_angle = -(line_angle)
-        rotation_scale = 1
-
-        rotation_matrix = cv2.getRotationMatrix2D(
-            rotation_center, rotation_angle, rotation_scale
-        )
-
-        img_rotated = cv2.warpAffine(img, rotation_matrix, (img_dim, img_dim))
-
-        return img_rotated
-
-    def _get_img_position(
-        self, line_counter: LineZone, text_width: int, text_height: int, is_in_count: bool
+    def _get_text_anchor(
+        self,
+        line_counter: LineZone,
+        text_width: int,
+        text_height: int,
+        is_in_count: bool,
+        centered: bool,
     ):
         """
         Set the position of the rotated image using line counter end point as reference.
@@ -521,35 +363,123 @@ class LineZoneAnnotator:
         """
         end_point = line_counter.vector.end.as_xy_int_tuple()
         line_angle = self._get_line_angle(line_counter)
-        # Set position of the text along and perpendicular to the line.
-        img_position = list(end_point)
+
+        # Move text anchor along and perpendicular to the line.
+        text_anchor = list(end_point)
 
         move_along_x = int(
-            math.cos(math.radians(line_angle)) * (text_width / 2 + self.text_padding)
+            math.cos(math.radians(line_angle)) * (text_width + self.text_padding)
         )
         move_along_y = int(
-            math.sin(math.radians(line_angle)) * (text_width / 2 + self.text_padding)
+            math.sin(math.radians(line_angle)) * (text_width + self.text_padding)
         )
 
         move_perp_x = int(
-            math.sin(math.radians(line_angle))
-            * (text_height / 2 + self.text_padding * 2)
+            math.sin(math.radians(line_angle)) * (text_height / 2 + self.text_padding)
         )
         move_perp_y = int(
-            math.cos(math.radians(line_angle))
-            * (text_height / 2 + self.text_padding * 2)
+            math.cos(math.radians(line_angle)) * (text_height / 2 + self.text_padding)
         )
 
-        img_position[0] -= move_along_x
-        img_position[1] -= move_along_y
+        text_anchor[0] -= move_along_x
+        text_anchor[1] -= move_along_y
         if is_in_count:
-            img_position[0] += move_perp_x
-            img_position[1] -= move_perp_y
+            text_anchor[0] += move_perp_x
+            text_anchor[1] -= move_perp_y
         else:
-            img_position[0] -= move_perp_x
-            img_position[1] += move_perp_y
+            text_anchor[0] -= move_perp_x
+            text_anchor[1] += move_perp_y
 
-        return img_position
+        return text_anchor
+
+    def _draw_text(
+        self, text_background_img: np.ndarray, text: str, text_anchor: tuple
+    ):
+        """
+        Draw text-box centered in the background image.
+
+        Attributes:
+            text_background_img (np.ndarray): Empty background image.
+            text (str): Text to draw in the background image.
+            text_anchor (int, int): xy insertion point to center text in background.
+
+        Returns:
+            np.ndarray: Background image with text drawed in it.
+        """
+        cv2.putText(
+            text_background_img,
+            text,
+            text_anchor,
+            cv2.FONT_HERSHEY_SIMPLEX,
+            self.text_scale,
+            (255, 255, 255),
+            self.text_thickness,
+            cv2.LINE_AA,
+        )
+
+        return text_background_img
+
+    def _draw_box(
+        self,
+        box_background_img: np.ndarray,
+        text_width: int,
+        text_height: int,
+        text_anchor: tuple,
+    ):
+        """
+        Draw text-box centered in the background image.
+
+        Attributes:
+            box_background_img (np.ndarray): Empty background image.
+            text_width (int): Text width.
+            text_height (int): Text height.
+            text_anchor (int, int): xy point to center text insertion.
+
+        Returns:
+            np.ndarray: Background image with text-box drawed in it.
+        """
+        box = Rect(
+            x=text_anchor[0],
+            y=text_anchor[1] - text_height,
+            width=text_width,
+            height=text_height,
+        ).pad(padding=self.text_padding)
+
+        cv2.rectangle(
+            box_background_img,
+            box.top_left.as_xy_int_tuple(),
+            box.bottom_right.as_xy_int_tuple(),
+            (255, 255, 255),
+            -1,
+        )
+
+        return box_background_img
+
+    def _rotate_img(
+        self, img: np.ndarray, line_counter: LineZone, rotation_center: Tuple
+    ):
+        """
+        Rotate img using line counter angle.
+
+        Attributes:
+            img (np.ndarray): Original image to rotate.
+            line_counter (LineZone): The line counter object used to annotate.
+
+        Returns:
+            np.ndarray: Image with the same shape as input but with rotated content.
+        """
+        line_angle = self._get_line_angle(line_counter)
+
+        rotation_angle = -(line_angle)
+        rotation_scale = 1
+
+        rotation_matrix = cv2.getRotationMatrix2D(
+            rotation_center, rotation_angle, rotation_scale
+        )
+
+        img_rotated = cv2.warpAffine(img, rotation_matrix, (img.shape[0], img.shape[1]))
+
+        return img_rotated
 
     def _get_img_bbox(self, img: np.ndarray, frame: np.ndarray, img_position: list):
         """
