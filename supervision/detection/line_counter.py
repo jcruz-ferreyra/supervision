@@ -309,7 +309,7 @@ class LineZoneAnnotator:
 
         frame = self._annotate_text(frame, text_img_rotated)
         frame = self._annotate_box(frame, box_img_rotated)
-        
+
         return frame
 
     def _get_line_angle(self, line_counter: LineZone):
@@ -481,64 +481,7 @@ class LineZoneAnnotator:
 
         return img_rotated
 
-    def _get_img_bbox(self, img: np.ndarray, frame: np.ndarray, img_position: list):
-        """
-        Calculate xyxy insertion bbox in the frame for the text/text-box images.
-
-        Attributes:
-            img (np.ndarray): text/text-box image.
-            frame (np.ndarray): Frame in which to insert the text/text-box images.
-            img_position (list): xy insertion point to place text/text-box images.
-
-        Returns:
-            (int, int, int, int): xyxy insertion bbox to place text/text-box images.
-        """
-        img_dim = img.shape[0]
-
-        y1 = max(img_position[1] - img_dim // 2, 0)
-        y2 = min(
-            img_position[1] + img_dim // 2 + img_dim % 2,
-            frame.shape[0],
-        )
-        x1 = max(img_position[0] - img_dim // 2, 0)
-        x2 = min(
-            img_position[0] + img_dim // 2 + img_dim % 2,
-            frame.shape[1],
-        )
-
-        return (x1, y1, x2, y2)
-
-    def _trim_img(self, img, frame, img_bbox):
-        """
-        Trim text/text-box images to the limits of the frame if needed.
-
-        Attributes:
-            img (np.ndarray): text/text-box image.
-            frame (np.ndarray): Frame in which to insert the text/text-box images.
-            img_bbox (list): xyxy insertion bbox to place text/text-box images.
-
-        Returns:
-            np.ndarray: Trimmed text/text-box images.
-        """
-        img_dim = img.shape[0]
-        (x1, y1, x2, y2) = img_bbox
-
-        if y2 - y1 != img_dim:
-            if y1 == 0:
-                img = img[(img_dim - y2) :, :]
-            elif y2 == frame.shape[0]:
-                img = img[: (y2 - y1), :]
-
-        if x2 - x1 != img_dim:
-            if x1 == 0:
-                img = img[:, (img_dim - x2) :]
-
-            elif x2 == frame.shape[1]:
-                img = img[:, : (x2 - x1)]
-
-        return img
-
-    def _annotate_box(self, frame, img, img_bbox):
+    def _annotate_box(self, frame, img):
         """
         Annotate text-box image in the original frame.
 
@@ -550,15 +493,13 @@ class LineZoneAnnotator:
         Returns:
             np.ndarray: Annotated frame.
         """
-        (x1, y1, x2, y2) = img_bbox
-
-        frame[y1:y2, x1:x2, 0][img > 95] = self.color.as_bgr()[0]
-        frame[y1:y2, x1:x2, 1][img > 95] = self.color.as_bgr()[1]
-        frame[y1:y2, x1:x2, 2][img > 95] = self.color.as_bgr()[2]
+        mask = img > 95
+        for i in range(3):
+            frame[:, :, i][mask] = self.color.as_bgr()[i]
 
         return frame
 
-    def _annotate_text(self, frame, img, img_bbox):
+    def _annotate_text(self, frame, img):
         """
         Annotate text image in the original frame.
 
@@ -570,16 +511,8 @@ class LineZoneAnnotator:
         Returns:
             np.ndarray: Annotated frame.
         """
-        (x1, y1, x2, y2) = img_bbox
-
-        frame[y1:y2, x1:x2, 0][img != 0] = self.text_color.as_bgr()[0] * (
-            img[img != 0] / 255
-        ) + self.color.as_bgr()[0] * (1 - (img[img != 0] / 255))
-        frame[y1:y2, x1:x2, 1][img != 0] = self.text_color.as_bgr()[1] * (
-            img[img != 0] / 255
-        ) + self.color.as_bgr()[1] * (1 - (img[img != 0] / 255))
-        frame[y1:y2, x1:x2, 2][img != 0] = self.text_color.as_bgr()[2] * (
-            img[img != 0] / 255
-        ) + self.color.as_bgr()[2] * (1 - (img[img != 0] / 255))
+        mask = img != 0
+        for i in range(3):
+            frame[:, :, i][mask] = self.text_color.as_bgr()[i]
 
         return frame
