@@ -7,7 +7,7 @@ import numpy as np
 from supervision.detection.core import Detections
 from supervision.draw.color import Color
 from supervision.draw.utils import draw_text
-from supervision.geometry.core import Point, Position, Vector
+from supervision.geometry.core import Point, Position, Rect, Vector
 
 
 class LineZone:
@@ -60,8 +60,6 @@ class LineZone:
         self.tracker_state: Dict[str, bool] = {}
         self.in_count: int = 0
         self.out_count: int = 0
-        self.trigger_in = trigger_in
-        self.trigger_out = trigger_out
         self.triggering_anchors = triggering_anchors
 
     @staticmethod
@@ -215,40 +213,40 @@ class LineZoneAnnotator:
         self.display_in_count: bool = display_in_count
         self.display_out_count: bool = display_out_count
 
-    def _annotate_count(
-        self,
-        frame: np.ndarray,
-        center_text_anchor: Point,
-        text: str,
-        is_in_count: bool,
-    ) -> None:
-        """This method is drawing the text on the frame.
+    # def _annotate_count(
+    #     self,
+    #     frame: np.ndarray,
+    #     center_text_anchor: Point,
+    #     text: str,
+    #     is_in_count: bool,
+    # ) -> None:
+    #     """This method is drawing the text on the frame.
 
-        Args:
-            frame (np.ndarray): The image on which the text will be drawn.
-            center_text_anchor: The center point that the text will be drawn.
-            text (str): The text that will be drawn.
-            is_in_count (bool): Whether to display the in count or out count.
-        """
-        _, text_height = cv2.getTextSize(
-            text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
-        )[0]
+    #     Args:
+    #         frame (np.ndarray): The image on which the text will be drawn.
+    #         center_text_anchor: The center point that the text will be drawn.
+    #         text (str): The text that will be drawn.
+    #         is_in_count (bool): Whether to display the in count or out count.
+    #     """
+    #     _, text_height = cv2.getTextSize(
+    #         text, cv2.FONT_HERSHEY_SIMPLEX, self.text_scale, self.text_thickness
+    #     )[0]
 
-        if is_in_count:
-            center_text_anchor.y -= int(self.text_offset * text_height)
-        else:
-            center_text_anchor.y += int(self.text_offset * text_height)
+    #     if is_in_count:
+    #         center_text_anchor.y -= int(self.text_offset * text_height)
+    #     else:
+    #         center_text_anchor.y += int(self.text_offset * text_height)
 
-        draw_text(
-            scene=frame,
-            text=text,
-            text_anchor=center_text_anchor,
-            text_color=self.text_color,
-            text_scale=self.text_scale,
-            text_thickness=self.text_thickness,
-            text_padding=self.text_padding,
-            background_color=self.color,
-        )
+    #     draw_text(
+    #         scene=frame,
+    #         text=text,
+    #         text_anchor=center_text_anchor,
+    #         text_color=self.text_color,
+    #         text_scale=self.text_scale,
+    #         text_thickness=self.text_thickness,
+    #         text_padding=self.text_padding,
+    #         background_color=self.color,
+    #     )
 
     def annotate(self, frame: np.ndarray, line_counter: LineZone) -> np.ndarray:
         """
@@ -256,14 +254,13 @@ class LineZoneAnnotator:
 
         Attributes:
             frame (np.ndarray): The image on which the line will be drawn.
-            line_counter (LineZone): The line counter object used to annotate.
+            line_counter (LineCounter): The line counter
+                that will be used to draw the line.
 
         Returns:
             np.ndarray: The image with the line drawn on it.
 
         """
-
-        # Draw line.
         cv2.line(
             frame,
             line_counter.vector.start.as_xy_int_tuple(),
@@ -282,22 +279,29 @@ class LineZoneAnnotator:
             lineType=cv2.LINE_AA,
         )
 
-        # Create in/out text.
-        in_text = (
-            f"{self.custom_in_text}: {line_counter.in_count}"
-            if self.custom_in_text is not None
-            else f"in: {line_counter.in_count}"
-        )
-        out_text = (
-            f"{self.custom_out_text}: {line_counter.out_count}"
-            if self.custom_out_text is not None
-            else f"out: {line_counter.out_count}"
-        )
+        if self.display_in_count:
+            in_text = (
+                f"{self.custom_in_text}: {line_counter.in_count}"
+                if self.custom_in_text is not None
+                else f"in: {line_counter.in_count}"
+            )
+            frame = self._annotate_count(
+                frame=frame,
+                line_counter=line_counter,
+                text=in_text,
+                is_in_count=True)
 
-        if line_counter.trigger_in:
-            frame = self._annotate_count(frame, line_counter, in_text, text_over=True)
-        if line_counter.trigger_out:
-            frame = self._annotate_count(frame, line_counter, out_text, text_over=False)
+        if self.display_out_count:
+            out_text = (
+                f"{self.custom_out_text}: {line_counter.out_count}"
+                if self.custom_out_text is not None
+                else f"out: {line_counter.out_count}"
+            )
+            frame = self._annotate_count(
+                frame=frame,
+                line_counter=line_counter,
+                text=out_text,
+                is_in_count=False)
 
         return frame
 
@@ -306,17 +310,17 @@ class LineZoneAnnotator:
         frame: np.ndarray,
         line_counter: LineZone,
         text: str,
-        text_over: bool = True,
-    ):
+        is_in_count: bool,
+    ) -> None:
         """
         Draws the counter for in/out counts aligned to the line.
 
-        Attributes:
-            text (str): Line of text to annotate alongside the count.
-            text_over (bool): Position of the text over/under the line.
-
-        Returns:
-            np.ndarray: Annotated frame.
+        Args:
+            frame (np.ndarray): The image on which the text will be drawn.
+            line_counter (LineCounter): The line counter
+                that will be used to draw the line.
+            text (str): The text that will be drawn.
+            is_in_count (bool): Whether to display the in count or out count.
         """
         
         (text_width, text_height), _ = cv2.getTextSize(
@@ -338,7 +342,7 @@ class LineZoneAnnotator:
         text_img_rotated = self._rotate_img(text_img, line_counter)
 
         img_position = self._get_img_position(
-            line_counter, text_width, text_height, text_over
+            line_counter, text_width, text_height, is_in_count
         )
 
         img_bbox = self._get_img_bbox(box_img_rotated, frame, img_position)
@@ -349,7 +353,6 @@ class LineZoneAnnotator:
         frame = self._annotate_box(frame, box_img_rotated, img_bbox)
         frame = self._annotate_text(frame, text_img_rotated, img_bbox)
 
-        return frame
 
     def _create_background_img(self, background_dim: int):
         """
@@ -502,7 +505,7 @@ class LineZoneAnnotator:
         return img_rotated
 
     def _get_img_position(
-        self, line_counter: LineZone, text_width: int, text_height: int, text_over: bool
+        self, line_counter: LineZone, text_width: int, text_height: int, is_in_count: bool
     ):
         """
         Set the position of the rotated image using line counter end point as reference.
@@ -511,7 +514,7 @@ class LineZoneAnnotator:
             line_counter (LineZone): The line counter object used to annotate.
             text_width (int): Text width.
             text_height (int): Text height.
-            text_over (bool): Whether the text should be placed over or below the line.
+            is_in_count (bool): Whether the text should be placed over or below the line.
 
         Returns:
             [int, int]: xy insertion point to place text/text-box images in frame.
@@ -539,7 +542,7 @@ class LineZoneAnnotator:
 
         img_position[0] -= move_along_x
         img_position[1] -= move_along_y
-        if text_over:
+        if is_in_count:
             img_position[0] += move_perp_x
             img_position[1] -= move_perp_y
         else:
@@ -649,33 +652,4 @@ class LineZoneAnnotator:
             img[img != 0] / 255
         ) + self.color.as_bgr()[2] * (1 - (img[img != 0] / 255))
 
-        text_anchor = Vector(
-            start=line_counter.vector.start, end=line_counter.vector.end
-        )
-
-        if self.display_in_count:
-            in_text = (
-                f"{self.custom_in_text}: {line_counter.in_count}"
-                if self.custom_in_text is not None
-                else f"in: {line_counter.in_count}"
-            )
-            self._annotate_count(
-                frame=frame,
-                center_text_anchor=text_anchor.center,
-                text=in_text,
-                is_in_count=True,
-            )
-
-        if self.display_out_count:
-            out_text = (
-                f"{self.custom_out_text}: {line_counter.out_count}"
-                if self.custom_out_text is not None
-                else f"out: {line_counter.out_count}"
-            )
-            self._annotate_count(
-                frame=frame,
-                center_text_anchor=text_anchor.center,
-                text=out_text,
-                is_in_count=False,
-            )
         return frame
