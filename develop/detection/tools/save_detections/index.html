@@ -12,13 +12,13 @@
         <meta name="author" content="Roboflow">
       
       
-        <link rel="canonical" href="https://supervision.roboflow.com/develop/detection/tools/smoother/">
+        <link rel="canonical" href="https://supervision.roboflow.com/develop/detection/tools/save_detections/">
       
       
-        <link rel="prev" href="../inference_slicer/">
+        <link rel="prev" href="../smoother/">
       
       
-        <link rel="next" href="../save_detections/">
+        <link rel="next" href="../../../annotators/">
       
       
       <link rel="icon" href="../../../assets/supervision-lenny.png">
@@ -26,7 +26,7 @@
     
     
       
-        <title>Detection Smoother - Supervision</title>
+        <title>Save Detections - Supervision</title>
       
     
     
@@ -94,7 +94,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#detection-smoother" class="md-skip">
+        <a href="#save-detections" class="md-skip">
           Skip to content
         </a>
       
@@ -133,7 +133,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Detection Smoother
+              Save Detections
             
           </span>
         </div>
@@ -700,6 +700,34 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../smoother/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Detection Smoother
+  </span>
+  
+    
+  
+  
+    <span class="md-status md-status--new"></span>
+  
+
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -716,7 +744,7 @@
           
   
   <span class="md-ellipsis">
-    Detection Smoother
+    Save Detections
   </span>
   
     
@@ -734,7 +762,7 @@
         
   
   <span class="md-ellipsis">
-    Detection Smoother
+    Save Detections
   </span>
   
     
@@ -763,16 +791,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DetectionsSmoother
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;CSVSink
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother-functions" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink-functions" class="md-nav__link">
     <span class="md-ellipsis">
       Functions
     </span>
@@ -782,7 +810,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother.__init__" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.__init__" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__init__
     </span>
@@ -791,9 +819,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother.update_with_detections" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.append" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;update_with_detections
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;append
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.open" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;open
     </span>
   </a>
   
@@ -808,34 +854,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../save_detections/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Save Detections
-  </span>
-  
-    
-  
-  
-    <span class="md-status md-status--new"></span>
-  
-
-  
-
-      </a>
     </li>
   
 
@@ -1520,16 +1538,16 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;DetectionsSmoother
+      <code class="doc-symbol doc-symbol-toc doc-symbol-class"></code>&nbsp;CSVSink
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother-functions" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink-functions" class="md-nav__link">
     <span class="md-ellipsis">
       Functions
     </span>
@@ -1539,7 +1557,7 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother.__init__" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.__init__" class="md-nav__link">
     <span class="md-ellipsis">
       <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;__init__
     </span>
@@ -1548,9 +1566,27 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#supervision.detection.tools.smoother.DetectionsSmoother.update_with_detections" class="md-nav__link">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.append" class="md-nav__link">
     <span class="md-ellipsis">
-      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;update_with_detections
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;append
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.close" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;close
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#supervision.detection.tools.csv_sink.CSVSink.open" class="md-nav__link">
+    <span class="md-ellipsis">
+      <code class="doc-symbol doc-symbol-toc doc-symbol-method"></code>&nbsp;open
     </span>
   </a>
   
@@ -1579,75 +1615,81 @@
   
 
 
-<h1 id="detection-smoother">Detection Smoother<a class="headerlink" href="#detection-smoother" title="Permanent link">&para;</a></h1>
+<h1 id="save-detections">Save Detections<a class="headerlink" href="#save-detections" title="Permanent link">&para;</a></h1>
+<div class="md-typeset">
+  <h2>CSV Sink</h2>
+</div>
+
 
 
 <div class="doc doc-object doc-class">
 
 
 
-<a id="supervision.detection.tools.smoother.DetectionsSmoother"></a>
+<a id="supervision.detection.tools.csv_sink.CSVSink"></a>
   <div class="doc doc-contents first">
 
   
-      <p>A utility class for smoothing detections over multiple frames in video tracking.
-It maintains a history of detections for each track and provides smoothed
-predictions based on these histories.</p>
-<video controls>
-    <source
-        src="https://media.roboflow.com/supervision-detection-smoothing.mp4"
-        type="video/mp4">
-</video>
-
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<ul>
-<li><code>DetectionsSmoother</code> requires the <code>tracker_id</code> for each detection. Refer to
-  <a href="/latest/trackers/">Roboflow Trackers</a> for
-  information on integrating tracking into your inference pipeline.</li>
-<li>This class is not compatible with segmentation models.</li>
-</ul>
+      <p>A utility class for saving detection data to a CSV file. This class is designed to
+efficiently serialize detection objects into a CSV format, allowing for the
+inclusion of bounding box coordinates and additional attributes like <code>confidence</code>,
+<code>class_id</code>, and <code>tracker_id</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>CSVSink allow to pass custom data alongside the detection fields, providing
+flexibility for logging various types of information.</p>
 </div>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>file_name</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The name of the CSV file where the detections will be stored.
+Defaults to 'output.csv'.</p>
+            </div>
+          </td>
+          <td>
+                <code>&#39;output.csv&#39;</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
 
 <details class="example" open>
   <summary>Example</summary>
   <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">supervision</span> <span class="k">as</span> <span class="nn">sv</span>
-
 <span class="kn">from</span> <span class="nn">ultralytics</span> <span class="kn">import</span> <span class="n">YOLO</span>
 
-<span class="n">video_info</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">VideoInfo</span><span class="o">.</span><span class="n">from_video_path</span><span class="p">(</span><span class="n">video_path</span><span class="o">=&lt;</span><span class="n">SOURCE_FILE_PATH</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="n">frame_generator</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">get_video_frames_generator</span><span class="p">(</span><span class="n">source_path</span><span class="o">=&lt;</span><span class="n">SOURCE_FILE_PATH</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">YOLO</span><span class="p">(</span><span class="o">&lt;</span><span class="n">SOURCE_MODEL_PATH</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">csv_sink</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">CSVSink</span><span class="p">(</span><span class="o">&lt;</span><span class="n">RESULT_CSV_FILE_PATH</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="n">frames_generator</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">get_video_frames_generator</span><span class="p">(</span><span class="o">&lt;</span><span class="n">SOURCE_VIDEO_PATH</span><span class="o">&gt;</span><span class="p">)</span>
 
-<span class="n">model</span> <span class="o">=</span> <span class="n">YOLO</span><span class="p">(</span><span class="o">&lt;</span><span class="n">MODEL_PATH</span><span class="o">&gt;</span><span class="p">)</span>
-<span class="n">tracker</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">ByteTrack</span><span class="p">(</span><span class="n">frame_rate</span><span class="o">=</span><span class="n">video_info</span><span class="o">.</span><span class="n">fps</span><span class="p">)</span>
-<span class="n">smoother</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">DetectionsSmoother</span><span class="p">()</span>
-
-<span class="n">annotator</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">BoundingBoxAnnotator</span><span class="p">()</span>
-
-<span class="k">with</span> <span class="n">sv</span><span class="o">.</span><span class="n">VideoSink</span><span class="p">(</span><span class="o">&lt;</span><span class="n">TARGET_FILE_PATH</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">video_info</span><span class="o">=</span><span class="n">video_info</span><span class="p">)</span> <span class="k">as</span> <span class="n">sink</span><span class="p">:</span>
-    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frame_generator</span><span class="p">:</span>
+<span class="k">with</span> <span class="n">csv_sink</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">frame</span> <span class="ow">in</span> <span class="n">frames_generator</span><span class="p">:</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">frame</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">detections</span> <span class="o">=</span> <span class="n">sv</span><span class="o">.</span><span class="n">Detections</span><span class="o">.</span><span class="n">from_ultralytics</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
-        <span class="n">detections</span> <span class="o">=</span> <span class="n">tracker</span><span class="o">.</span><span class="n">update_with_detections</span><span class="p">(</span><span class="n">detections</span><span class="p">)</span>
-        <span class="n">detections</span> <span class="o">=</span> <span class="n">smoother</span><span class="o">.</span><span class="n">update_with_detections</span><span class="p">(</span><span class="n">detections</span><span class="p">)</span>
-
-        <span class="n">annotated_frame</span> <span class="o">=</span> <span class="n">bounding_box_annotator</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">frame</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">detections</span><span class="p">)</span>
-        <span class="n">sink</span><span class="o">.</span><span class="n">write_frame</span><span class="p">(</span><span class="n">annotated_frame</span><span class="p">)</span>
+        <span class="n">sink</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;&lt;CUSTOM_LABEL&gt;&#39;</span><span class="p">:</span><span class="s1">&#39;&lt;CUSTOM_DATA&gt;&#39;</span><span class="p">})</span>
 </code></pre></div>
 </details>
             <details class="quote">
-              <summary>Source code in <code>supervision/detection/tools/smoother.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 10</span>
-<span class="normal"> 11</span>
-<span class="normal"> 12</span>
-<span class="normal"> 13</span>
-<span class="normal"> 14</span>
-<span class="normal"> 15</span>
-<span class="normal"> 16</span>
-<span class="normal"> 17</span>
-<span class="normal"> 18</span>
-<span class="normal"> 19</span>
-<span class="normal"> 20</span>
+              <summary>Source code in <code>supervision/detection/tools/csv_sink.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 20</span>
 <span class="normal"> 21</span>
 <span class="normal"> 22</span>
 <span class="normal"> 23</span>
@@ -1745,115 +1787,231 @@ predictions based on these histories.</p>
 <span class="normal">115</span>
 <span class="normal">116</span>
 <span class="normal">117</span>
-<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">DetectionsSmoother</span><span class="p">:</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">CSVSink</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    A utility class for smoothing detections over multiple frames in video tracking.</span>
-<span class="sd">    It maintains a history of detections for each track and provides smoothed</span>
-<span class="sd">    predictions based on these histories.</span>
+<span class="sd">    A utility class for saving detection data to a CSV file. This class is designed to</span>
+<span class="sd">    efficiently serialize detection objects into a CSV format, allowing for the</span>
+<span class="sd">    inclusion of bounding box coordinates and additional attributes like `confidence`,</span>
+<span class="sd">    `class_id`, and `tracker_id`.</span>
 
-<span class="sd">    &lt;video controls&gt;</span>
-<span class="sd">        &lt;source</span>
-<span class="sd">            src=&quot;https://media.roboflow.com/supervision-detection-smoothing.mp4&quot;</span>
-<span class="sd">            type=&quot;video/mp4&quot;&gt;</span>
-<span class="sd">    &lt;/video&gt;</span>
+<span class="sd">    !!! tip</span>
 
-<span class="sd">    !!! warning</span>
+<span class="sd">        CSVSink allow to pass custom data alongside the detection fields, providing</span>
+<span class="sd">        flexibility for logging various types of information.</span>
 
-<span class="sd">        - `DetectionsSmoother` requires the `tracker_id` for each detection. Refer to</span>
-<span class="sd">          [Roboflow Trackers](/latest/trackers/) for</span>
-<span class="sd">          information on integrating tracking into your inference pipeline.</span>
-<span class="sd">        - This class is not compatible with segmentation models.</span>
+<span class="sd">    Args:</span>
+<span class="sd">        file_name (str): The name of the CSV file where the detections will be stored.</span>
+<span class="sd">            Defaults to &#39;output.csv&#39;.</span>
 
 <span class="sd">    Example:</span>
 <span class="sd">        ```python</span>
 <span class="sd">        import supervision as sv</span>
-
 <span class="sd">        from ultralytics import YOLO</span>
 
-<span class="sd">        video_info = sv.VideoInfo.from_video_path(video_path=&lt;SOURCE_FILE_PATH&gt;)</span>
-<span class="sd">        frame_generator = sv.get_video_frames_generator(source_path=&lt;SOURCE_FILE_PATH&gt;)</span>
+<span class="sd">        model = YOLO(&lt;SOURCE_MODEL_PATH&gt;)</span>
+<span class="sd">        csv_sink = sv.CSVSink(&lt;RESULT_CSV_FILE_PATH&gt;)</span>
+<span class="sd">        frames_generator = sv.get_video_frames_generator(&lt;SOURCE_VIDEO_PATH&gt;)</span>
 
-<span class="sd">        model = YOLO(&lt;MODEL_PATH&gt;)</span>
-<span class="sd">        tracker = sv.ByteTrack(frame_rate=video_info.fps)</span>
-<span class="sd">        smoother = sv.DetectionsSmoother()</span>
-
-<span class="sd">        annotator = sv.BoundingBoxAnnotator()</span>
-
-<span class="sd">        with sv.VideoSink(&lt;TARGET_FILE_PATH&gt;, video_info=video_info) as sink:</span>
-<span class="sd">            for frame in frame_generator:</span>
+<span class="sd">        with csv_sink:</span>
+<span class="sd">            for frame in frames_generator:</span>
 <span class="sd">                result = model(frame)[0]</span>
 <span class="sd">                detections = sv.Detections.from_ultralytics(result)</span>
-<span class="sd">                detections = tracker.update_with_detections(detections)</span>
-<span class="sd">                detections = smoother.update_with_detections(detections)</span>
-
-<span class="sd">                annotated_frame = bounding_box_annotator.annotate(frame.copy(), detections)</span>
-<span class="sd">                sink.write_frame(annotated_frame)</span>
+<span class="sd">                sink.append(detections, custom_data={&#39;&lt;CUSTOM_LABEL&gt;&#39;:&#39;&lt;CUSTOM_DATA&gt;&#39;})</span>
 <span class="sd">        ```</span>
 <span class="sd">    &quot;&quot;&quot;</span>  <span class="c1"># noqa: E501 // docs</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;output.csv&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Args:</span>
-<span class="sd">            length (int): The maximum number of frames to consider for smoothing</span>
-<span class="sd">                detections. Defaults to 5.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">length</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">update_with_detections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Detections</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Updates the smoother with a new set of detections from a frame.</span>
+<span class="sd">        Initialize the CSVSink instance.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            detections (Detections): The detections to add to the smoother.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">            file_name (str): The name of the CSV file.</span>
 
-        <span class="k">if</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span>
-                <span class="s2">&quot;Smoothing skipped. DetectionsSmoother requires tracker_id. Refer to &quot;</span>
-                <span class="s2">&quot;https://supervision.roboflow.com/latest/trackers for more information.&quot;</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">open</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CSVSink</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">exc_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">type</span><span class="p">],</span>
+        <span class="n">exc_val</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="ne">Exception</span><span class="p">],</span>
+        <span class="n">exc_tb</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Open the CSV file for writing.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parent_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parent_directory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_directory</span><span class="p">):</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_directory</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Close the CSV file.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse_detection_data</span><span class="p">(</span>
+        <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+        <span class="n">parsed_rows</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detections</span><span class="o">.</span><span class="n">xyxy</span><span class="p">)):</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;x_min&quot;</span><span class="p">:</span> <span class="n">detections</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                <span class="s2">&quot;y_min&quot;</span><span class="p">:</span> <span class="n">detections</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                <span class="s2">&quot;x_max&quot;</span><span class="p">:</span> <span class="n">detections</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">],</span>
+                <span class="s2">&quot;y_max&quot;</span><span class="p">:</span> <span class="n">detections</span><span class="o">.</span><span class="n">xyxy</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">3</span><span class="p">],</span>
+                <span class="s2">&quot;class_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">detections</span><span class="o">.</span><span class="n">class_id</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">detections</span><span class="o">.</span><span class="n">class_id</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                <span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">detections</span><span class="o">.</span><span class="n">confidence</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">detections</span><span class="o">.</span><span class="n">confidence</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+                <span class="s2">&quot;tracker_id&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">if</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span> <span class="ow">is</span> <span class="kc">None</span>
+                <span class="k">else</span> <span class="nb">str</span><span class="p">(</span><span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">detections</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">value</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">row</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">custom_data</span><span class="p">:</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">custom_data</span><span class="p">)</span>
+            <span class="n">parsed_rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">parsed_rows</span>
+
+    <span class="k">def</span> <span class="nf">append</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Append detection data to the CSV file.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            detections (Detections): The detection data.</span>
+<span class="sd">            custom_data (Dict[str, Any]): Custom data to include.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot append to CSV: The file &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="si">}</span><span class="s2">&#39; is not open.&quot;</span>
             <span class="p">)</span>
-            <span class="k">return</span> <span class="n">detections</span>
+        <span class="n">field_names</span> <span class="o">=</span> <span class="n">CSVSink</span><span class="o">.</span><span class="n">parse_field_names</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="n">field_names</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span> <span class="o">=</span> <span class="kc">True</span>
 
-        <span class="k">for</span> <span class="n">detection_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detections</span><span class="p">)):</span>
-            <span class="n">tracker_id</span> <span class="o">=</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">]</span>
-            <span class="k">if</span> <span class="n">tracker_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">field_names</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Field names do not match the header. &quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="si">}</span><span class="s2">, given: </span><span class="si">{</span><span class="n">field_names</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
 
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">tracker_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">detections</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">])</span>
+        <span class="n">parsed_rows</span> <span class="o">=</span> <span class="n">CSVSink</span><span class="o">.</span><span class="n">parse_detection_data</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">parsed_rows</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+                <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="p">]</span>
+            <span class="p">)</span>
 
-        <span class="k">for</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="n">track_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-
-        <span class="k">for</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-            <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]]):</span>
-                <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_smoothed_detections</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">get_track</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">track_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Detections</span><span class="p">]:</span>
-        <span class="n">track</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">track_id</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">track</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="n">track</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">track</span> <span class="k">if</span> <span class="n">d</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">track</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-
-        <span class="n">ret</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">track</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="n">ret</span><span class="o">.</span><span class="n">xyxy</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">xyxy</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">track</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">ret</span><span class="o">.</span><span class="n">confidence</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">([</span><span class="n">d</span><span class="o">.</span><span class="n">confidence</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">track</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">ret</span>
-
-    <span class="k">def</span> <span class="nf">get_smoothed_detections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Detections</span><span class="p">:</span>
-        <span class="n">tracked_detections</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">for</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">:</span>
-            <span class="n">track</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_track</span><span class="p">(</span><span class="n">track_id</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">track</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">tracked_detections</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">track</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">Detections</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">tracked_detections</span><span class="p">)</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">parse_field_names</span><span class="p">(</span>
+        <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">dynamic_header</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span>
+            <span class="nb">set</span><span class="p">(</span><span class="n">custom_data</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span> <span class="o">|</span> <span class="nb">set</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="p">{})</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">BASE_HEADER</span> <span class="o">+</span> <span class="n">dynamic_header</span>
 </code></pre></div></td></tr></table></div>
             </details>
 
@@ -1867,21 +2025,22 @@ predictions based on these histories.</p>
 
 
 
-<h2 id="supervision.detection.tools.smoother.DetectionsSmoother-functions">Functions<a href="#supervision.detection.tools.smoother.DetectionsSmoother-functions" class="headerlink" title="Permanent link">&para;</a></h2>
+<h2 id="supervision.detection.tools.csv_sink.CSVSink-functions">Functions<a href="#supervision.detection.tools.csv_sink.CSVSink-functions" class="headerlink" title="Permanent link">&para;</a></h2>
 
 
 <div class="doc doc-object doc-function">
 
 
 
-<h3 id="supervision.detection.tools.smoother.DetectionsSmoother.__init__" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span></code>
+<h3 id="supervision.detection.tools.csv_sink.CSVSink.__init__" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">file_name</span><span class="o">=</span><span class="s1">&#39;output.csv&#39;</span><span class="p">)</span></code>
 
-<a href="#supervision.detection.tools.smoother.DetectionsSmoother.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#supervision.detection.tools.csv_sink.CSVSink.__init__" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
   <div class="doc doc-contents ">
   
+      <p>Initialize the CSVSink instance.</p>
 
 
 
@@ -1897,38 +2056,77 @@ predictions based on these histories.</p>
     </thead>
     <tbody>
         <tr>
-          <td><code>length</code></td>
+          <td><code>file_name</code></td>
           <td>
-                <code>int</code>
+                <code>str</code>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>The maximum number of frames to consider for smoothing
-detections. Defaults to 5.</p>
+              <p>The name of the CSV file.</p>
             </div>
           </td>
           <td>
-                <code>5</code>
+                <code>&#39;output.csv&#39;</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>None</p>
+            </div>
           </td>
         </tr>
     </tbody>
   </table>
 
           <details class="quote">
-            <summary>Source code in <code>supervision/detection/tools/smoother.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+            <summary>Source code in <code>supervision/detection/tools/csv_sink.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
-<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;output.csv&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Initialize the CSVSink instance.</span>
+
 <span class="sd">    Args:</span>
-<span class="sd">        length (int): The maximum number of frames to consider for smoothing</span>
-<span class="sd">            detections. Defaults to 5.</span>
+<span class="sd">        file_name (str): The name of the CSV file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="k">lambda</span><span class="p">:</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">length</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">file_name</span> <span class="o">=</span> <span class="n">file_name</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">open</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="p">[]</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1940,15 +2138,15 @@ detections. Defaults to 5.</p>
 
 
 
-<h3 id="supervision.detection.tools.smoother.DetectionsSmoother.update_with_detections" class="doc doc-heading">
-<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="n">update_with_detections</span><span class="p">(</span><span class="n">detections</span><span class="p">)</span></code>
+<h3 id="supervision.detection.tools.csv_sink.CSVSink.append" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="n">append</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
-<a href="#supervision.detection.tools.smoother.DetectionsSmoother.update_with_detections" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#supervision.detection.tools.csv_sink.CSVSink.append" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
   <div class="doc doc-contents ">
   
-      <p>Updates the smoother with a new set of detections from a frame.</p>
+      <p>Append detection data to the CSV file.</p>
 
 
 
@@ -1970,36 +2168,235 @@ detections. Defaults to 5.</p>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>The detections to add to the smoother.</p>
+              <p>The detection data.</p>
             </div>
           </td>
           <td>
               <em>required</em>
           </td>
         </tr>
+        <tr>
+          <td><code>custom_data</code></td>
+          <td>
+                <code><span title="typing.Dict">Dict</span>[str, <span title="typing.Any">Any</span>]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Custom data to include.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>None</p>
+            </div>
+          </td>
+        </tr>
     </tbody>
   </table>
 
           <details class="quote">
-            <summary>Source code in <code>supervision/detection/tools/smoother.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
-<span class="normal">65</span>
-<span class="normal">66</span>
-<span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span>
-<span class="normal">70</span>
-<span class="normal">71</span>
-<span class="normal">72</span>
-<span class="normal">73</span>
-<span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
+            <summary>Source code in <code>supervision/detection/tools/csv_sink.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">append</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Append detection data to the CSV file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        detections (Detections): The detection data.</span>
+<span class="sd">        custom_data (Dict[str, Any]): Custom data to include.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Cannot append to CSV: The file &#39;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="si">}</span><span class="s2">&#39; is not open.&quot;</span>
+        <span class="p">)</span>
+    <span class="n">field_names</span> <span class="o">=</span> <span class="n">CSVSink</span><span class="o">.</span><span class="n">parse_field_names</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span> <span class="o">=</span> <span class="n">field_names</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">field_names</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">header_written</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">if</span> <span class="n">field_names</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Field names do not match the header. &quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;Expected: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="si">}</span><span class="s2">, given: </span><span class="si">{</span><span class="n">field_names</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">parsed_rows</span> <span class="o">=</span> <span class="n">CSVSink</span><span class="o">.</span><span class="n">parse_detection_data</span><span class="p">(</span><span class="n">detections</span><span class="p">,</span> <span class="n">custom_data</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">parsed_rows</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">row</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">field_name</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">field_name</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field_names</span><span class="p">]</span>
+        <span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="supervision.detection.tools.csv_sink.CSVSink.close" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="n">close</span><span class="p">()</span></code>
+
+<a href="#supervision.detection.tools.csv_sink.CSVSink.close" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Close the CSV file.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>None</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>supervision/detection/tools/csv_sink.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Close the CSV file.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="supervision.detection.tools.csv_sink.CSVSink.open" class="doc doc-heading">
+<code class="doc-symbol doc-symbol-heading doc-symbol-method"></code>          <code class="highlight language-python"><span class="nb">open</span><span class="p">()</span></code>
+
+<a href="#supervision.detection.tools.csv_sink.CSVSink.open" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Open the CSV file for writing.</p>
+
+
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code>None</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>None</p>
+            </div>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>supervision/detection/tools/csv_sink.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
 <span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
@@ -2011,38 +2408,19 @@ detections. Defaults to 5.</p>
 <span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
-<span class="normal">93</span>
-<span class="normal">94</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">update_with_detections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">detections</span><span class="p">:</span> <span class="n">Detections</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Detections</span><span class="p">:</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Updates the smoother with a new set of detections from a frame.</span>
+<span class="sd">    Open the CSV file for writing.</span>
 
-<span class="sd">    Args:</span>
-<span class="sd">        detections (Detections): The detections to add to the smoother.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">parent_directory</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">parent_directory</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">parent_directory</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">parent_directory</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span>
-            <span class="s2">&quot;Smoothing skipped. DetectionsSmoother requires tracker_id. Refer to &quot;</span>
-            <span class="s2">&quot;https://supervision.roboflow.com/latest/trackers for more information.&quot;</span>
-        <span class="p">)</span>
-        <span class="k">return</span> <span class="n">detections</span>
-
-    <span class="k">for</span> <span class="n">detection_idx</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">detections</span><span class="p">)):</span>
-        <span class="n">tracker_id</span> <span class="o">=</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">tracker_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">continue</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">tracker_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">detections</span><span class="p">[</span><span class="n">detection_idx</span><span class="p">])</span>
-
-    <span class="k">for</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">if</span> <span class="n">track_id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">detections</span><span class="o">.</span><span class="n">tracker_id</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">track_id</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
-        <span class="k">if</span> <span class="nb">all</span><span class="p">([</span><span class="n">d</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]]):</span>
-            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">tracks</span><span class="p">[</span><span class="n">track_id</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_smoothed_detections</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file_name</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">file</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
