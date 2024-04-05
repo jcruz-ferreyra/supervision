@@ -303,3 +303,12 @@ We love your input! Please see our [contributing guide](https://github.com/robof
       </a>
   </div>
 </div>
+
+
+## jcruz changes
+
+supervision/detection/line_zone.py: add support for non horizontal lines
+
+supervision/tracker/core.py: select the most repeated class_id during last 30 frames
+
+supervision/tracker/kalman_filter.py: reduce uncertainty (std) of current detections line 119
