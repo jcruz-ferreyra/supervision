@@ -366,7 +366,7 @@ class ByteTrack:
         scores = tensors[:, 4]
         bboxes = tensors[:, :4]
 
-        remain_inds = scores > self.track_activation_threshold
+        inds_keep = scores > self.track_activation_threshold
         inds_low = scores > 0.1
         inds_high = scores < self.track_activation_threshold
 

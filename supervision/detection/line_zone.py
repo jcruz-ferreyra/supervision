@@ -82,6 +82,7 @@ class LineZone:
         self.in_count: int = 0
         self.out_count: int = 0
         self.triggering_anchors = triggering_anchors
+        self.counted_trackers: list = []
 
     @staticmethod
     def calculate_region_of_interest_limits(vector: Vector) -> Tuple[Vector, Vector]:
@@ -151,6 +152,8 @@ class LineZone:
         for i, tracker_id in enumerate(detections.tracker_id):
             if tracker_id is None:
                 continue
+            elif tracker_id in self.counted_trackers:
+                continue
 
             box_anchors = [Point(x=x, y=y) for x, y in all_anchors[:, i, :]]
 
@@ -187,6 +190,8 @@ class LineZone:
             else:
                 self.out_count += 1
                 crossed_out[i] = True
+
+            self.counted_trackers.append(tracker_id)
 
         return crossed_in, crossed_out
 
