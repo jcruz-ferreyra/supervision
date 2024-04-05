@@ -1,16 +1,20 @@
 ---
+template: index.html
 comments: true
+hide:
+  - navigation
+  - toc
 ---
 
-<div align="center">
-  <p>
-    <a align="center" href="" target="_blank">
-      <img
-        width="850"
-        src="https://media.roboflow.com/open-source/supervision/rf-supervision-banner.png?updatedAt=1678995927529"
-      >
-    </a>
-  </p>
+<div class="md-typeset">
+  <h1></h1>
+</div>
+
+<div align="center" id="logo">
+  <a align="center" href="" target="_blank">
+      <img width="850"
+          src="https://media.roboflow.com/open-source/supervision/rf-supervision-banner.png?updatedAt=1678995927529">
+  </a>
 </div>
 
 ## 👋 Hello
@@ -24,43 +28,9 @@ We write your reusable computer vision tools. Whether you need to load your data
     >
 </video>
 
-## 🚀 Quickstart
-
-<div class="grid cards" markdown>
-
--   __Detect and Annotate__
-
-    ---
-
-    Annotate predictions from a range of object detection and segmentation models
-
-    [:octicons-arrow-right-24: Tutorial](how_to/detect_and_annotate.md)
-
--   __Track Objects__
-
-    ---
-
-    Discover how to enhance video analysis by implementing seamless object tracking
-
-    [:octicons-arrow-right-24: Tutorial](how_to/track_objects.md)
-
--   > __Count Objects Crossing Line__
-
-    ---
-
-    Explore methods to accurately count and analyze objects crossing a predefined line
-
--   > __Filter Objects in Zone__
-
-    ---
-
-    Master the techniques to selectively filter and focus on objects within a specific zone
-
-</div>
-
 ## 💻 Install
 
-You can install `supervision` with pip in a
+You can install `supervision` in a
 [**Python>=3.8**](https://www.python.org/) environment.
 
 !!! example "pip install (recommended)"
@@ -76,7 +46,25 @@ You can install `supervision` with pip in a
         If you require the full version of `supervision` with GUI support you can install the desktop version. This version includes the GUI components of OpenCV, allowing you to display images and videos on the screen.
 
         ```bash
-        pip install supervision[desktop]
+        pip install "supervision[desktop]"
+        ```
+
+!!! example "conda/mamba install"
+
+    === "conda"
+
+        [![conda-recipe](https://img.shields.io/badge/recipe-supervision-green.svg)](https://anaconda.org/conda-forge/supervision) [![conda-downloads](https://img.shields.io/conda/dn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![conda-version](https://img.shields.io/conda/vn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![conda-platforms](https://img.shields.io/conda/pn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision)
+
+        ```bash
+        conda install -c conda-forge supervision
+        ```
+
+    === "mamba"
+
+        [![mamba-recipe](https://img.shields.io/badge/recipe-supervision-green.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-downloads](https://img.shields.io/conda/dn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-version](https://img.shields.io/conda/vn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision) [![mamba-platforms](https://img.shields.io/conda/pn/conda-forge/supervision.svg)](https://anaconda.org/conda-forge/supervision)
+
+        ```bash
+        mamba install -c conda-forge supervision
         ```
 
 !!! example "git clone (for development)"
@@ -117,3 +105,45 @@ You can install `supervision` with pip in a
         # desktop install
         poetry install --extras "desktop"
         ```
+
+## 🚀 Quickstart
+
+<div class="grid cards" markdown>
+
+-   __Detect and Annotate__
+
+    ---
+
+    Annotate predictions from a range of object detection and segmentation models
+
+    [:octicons-arrow-right-24: Tutorial](how_to/detect_and_annotate.md)
+
+-   __Track Objects__
+
+    ---
+
+    Discover how to enhance video analysis by implementing seamless object tracking
+
+    [:octicons-arrow-right-24: Tutorial](how_to/track_objects.md)
+
+-   __Detect Small Objects__
+
+    ---
+
+    Learn how to detect small objects in images
+
+    [:octicons-arrow-right-24: Tutorial](how_to/detect_small_objects.md)
+
+-   > __Count Objects Crossing Line__
+
+    ---
+
+    Explore methods to accurately count and analyze objects crossing a predefined line
+
+-   > __Filter Objects in Zone__
+
+    ---
+
+    Master the techniques to selectively filter and focus on objects within a specific zone
+
+</div>
