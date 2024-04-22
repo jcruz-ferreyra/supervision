@@ -1,4 +1,5 @@
 import math
+from collections import defaultdict
 from typing import Dict, Iterable, Optional, Tuple
 
 import cv2
@@ -79,8 +80,8 @@ class LineZone:
         self.vector = Vector(start=start, end=end)
         self.limits = self.calculate_region_of_interest_limits(vector=self.vector)
         self.tracker_state: Dict[str, bool] = {}
-        self.in_count: int = 0
-        self.out_count: int = 0
+        self.in_count: Dict[int, int] = defaultdict(int)
+        self.out_count: Dict[int, int] = defaultdict(int)
         self.triggering_anchors = triggering_anchors
         self.counted_trackers: list = []
 
@@ -149,7 +150,9 @@ class LineZone:
             ]
         )
 
-        for i, tracker_id in enumerate(detections.tracker_id):
+        for i, (class_id, tracker_id) in enumerate(
+            zip(detections.class_id, detections.tracker_id)
+        ):
             if tracker_id is None:
                 continue
             elif tracker_id in self.counted_trackers:
@@ -185,10 +188,10 @@ class LineZone:
 
             self.tracker_state[tracker_id] = tracker_state
             if tracker_state:
-                self.in_count += 1
+                self.in_count[class_id] += 1
                 crossed_in[i] = True
             else:
-                self.out_count += 1
+                self.out_count[class_id] += 1
                 crossed_out[i] = True
 
             self.counted_trackers.append(tracker_id)
