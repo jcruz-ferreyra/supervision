@@ -545,8 +545,12 @@ class LineZoneAnnotator:
         )
 
         if self.display_in_count:
+            in_count = (
+                sum(line_counter.in_count.values()) if line_counter.in_count else 0
+            )
+
             in_text = (
-                f"{self.custom_in_text}: {line_counter.in_count}"
+                f"{self.custom_in_text}: {in_count}"
                 if self.custom_in_text is not None
                 else f"in: {line_counter.in_count}"
             )
@@ -557,9 +561,14 @@ class LineZoneAnnotator:
                 is_in_count=True,
             )
 
+
         if self.display_out_count:
+            out_count = (
+                sum(line_counter.out_count.values()) if line_counter.out_count else 0
+            )
+
             out_text = (
-                f"{self.custom_out_text}: {line_counter.out_count}"
+                f"{self.custom_out_text}: {out_count}"
                 if self.custom_out_text is not None
                 else f"out: {line_counter.out_count}"
             )
