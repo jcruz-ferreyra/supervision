@@ -306,6 +306,7 @@ class ByteTrack:
             detections.tracker_id = np.full(len(detections), -1, dtype=int)
             for i_detection, i_track in matches:
                 detections.tracker_id[i_detection] = int(tracks[i_track].track_id)
+                detections.class_id[i_detection] = int(tracks[i_track].class_ids)
 
             return detections[detections.tracker_id != -1]
 
