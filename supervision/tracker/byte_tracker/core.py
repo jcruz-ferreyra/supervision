@@ -10,6 +10,15 @@ from supervision.tracker.byte_tracker.basetrack import BaseTrack, TrackState
 from supervision.tracker.byte_tracker.kalman_filter import KalmanFilter
 from supervision.utils.internal import deprecated_parameter
 
+def _get_most_repeated_class(previous_class_ids, frame_period=30):
+    previous_class_ids = (
+        previous_class_ids[-frame_period:]
+        if len(previous_class_ids) >= frame_period
+        else previous_class_ids
+    )
+    count = Counter(previous_class_ids)
+
+    return count.most_common(1)[0][0]
 
 class STrack(BaseTrack):
     shared_kalman = KalmanFilter()
@@ -80,20 +89,7 @@ class STrack(BaseTrack):
 
         # set as class id the most repeated class id in previous 30 frames
         self.previous_class_ids.append(new_track.class_ids)
-        last_30 = (
-            self.previous_class_ids[-30:]
-            if len(self.previous_class_ids) >= 30
-            else self.previous_class_ids
-        )
-        counts = Counter(last_30)
-
-        def custom_key(item):
-            count_keys = list(counts.keys())
-            count_keys.reverse()
-            return counts[item], count_keys.index(item)
-        
-        new_class_id = max(set(last_30), key=custom_key)
-        self.class_ids = new_class_id
+        self.class_ids = _get_most_repeated_class(self.previous_class_ids)
 
         self.score = new_track.score
 
@@ -117,20 +113,7 @@ class STrack(BaseTrack):
 
         # set as class id the most repeated class id in previous 30 frames
         self.previous_class_ids.append(new_track.class_ids)
-        last_30 = (
-            self.previous_class_ids[-30:]
-            if len(self.previous_class_ids) >= 30
-            else self.previous_class_ids
-        )
-        counts = Counter(last_30)
-
-        def custom_key(item):
-            count_keys = list(counts.keys())
-            count_keys.reverse()
-            return counts[item], count_keys.index(item)
-        
-        new_class_id = max(set(last_30), key=custom_key)
-        self.class_ids = new_class_id
+        self.class_ids = _get_most_repeated_class(self.previous_class_ids)
         
         self.score = new_track.score
 
