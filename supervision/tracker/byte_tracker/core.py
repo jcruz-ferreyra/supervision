@@ -94,7 +94,7 @@ class STrack(BaseTrack):
 
         self.frame_id = frame_id
         if new_id:
-            self.track_id = self.next_id()
+            self.internal_track_id = self.next_id()
 
         # set as class id the most repeated class id in previous 30 frames
         self.previous_class_ids.append(new_track.class_ids)
@@ -334,7 +334,7 @@ class ByteTrack:
             matches, _, _ = matching.linear_assignment(iou_costs, 0.5)
             detections.tracker_id = np.full(len(detections), -1, dtype=int)
             for i_detection, i_track in matches:
-                detections.tracker_id[i_detection] = int(tracks[i_track].track_id)
+                detections.tracker_id[i_detection] = int(tracks[i_track].external_track_id)
                 detections.class_id[i_detection] = int(tracks[i_track].class_ids)
 
             return detections[detections.tracker_id != -1]
