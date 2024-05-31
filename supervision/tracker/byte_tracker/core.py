@@ -397,7 +397,7 @@ class ByteTrack:
         if len(dets_keep) > 0:
             """Detections"""
             detections = [
-                STrack(STrack.tlbr_to_tlwh(tlbr), s, c)
+                STrack(STrack.tlbr_to_tlwh(tlbr), s, c, self.minimum_consecutive_frames)
                 for (tlbr, s, c) in zip(dets_keep, scores_keep, class_ids_keep)
             ]
         else:
